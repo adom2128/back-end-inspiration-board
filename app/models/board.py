@@ -8,14 +8,21 @@ class Board(db.Model):
     card = db.relationship("Card", back_populates="board")
 
     @classmethod
-    def from_dict(cls, board_data):
-        try:
-            new_board = Board(title=board_data["title"],
-                              owner=board_data["owner"],
-                              )
-        except KeyError:
-            abort(make_response(jsonify({"details": "Invalid data"}), 400))
+    # def from_dict(cls, board_data):
+    #     try:
+    #         new_board = Board(title=board_data["title"],
+    #                           owner=board_data["owner"],
+    #                           )
+    #     except KeyError:
+    #         abort(make_response(jsonify({"details": "Invalid data"}), 400))
 
+    #     return new_board
+
+    def from_dict(cls, goal_data):
+        new_board = Board(title=goal_data["title"],
+                          owner=goal_data["owner"],
+                          )
+        
         return new_board
 
 

@@ -15,6 +15,29 @@ def create_board():
     return make_response(jsonify({"board": new_board.to_dict()}), 201)
 
 
+# @board_bp.route("/<board_id>/cards", methods=["POST"])
+# def add_card_to_goal(goal_id):
+#     board = validate_model(Board, board_id)
+
+#     request_body = request.get_json()
+#     card_ids_list = request_body["task_ids"]
+
+#     for task_id in task_ids_list:
+#         task = validate_model(Task, task_id)
+#         task.goal_id = goal.goal_id
+
+#         db.session.commit()
+    
+#     goal_ids = [task.task_id for task in goal.tasks]
+
+#     return make_response(jsonify({"id": goal.goal_id, "task_ids": goal_ids}), 200)
+    
+
+    
+
+
+
+
 @board_bp.route("", methods=["GET"])
 def read_all_boards():
     
