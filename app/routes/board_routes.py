@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify, make_response
 from app import db
 from app.models.board import Board
+from app.models.card import Card
 from .routes_helpers import validate_model
 
 board_bp = Blueprint("boards", __name__, url_prefix="/boards")
@@ -8,6 +9,7 @@ board_bp = Blueprint("boards", __name__, url_prefix="/boards")
 @board_bp.route("", methods=["POST"])
 def create_board():
     request_body = request.get_json()
+
     new_board = Board.from_dict(request_body)
 
     db.session.add(new_board)
@@ -16,28 +18,23 @@ def create_board():
     return make_response(jsonify({"board": new_board.to_dict()}), 201)
 
 
-# @board_bp.route("/<board_id>/cards", methods=["POST"])
-# def add_card_to_goal(goal_id):
-#     board = validate_model(Board, board_id)
+@board_bp.route("/<board_id>/cards", methods=["POST"])
+def add_card_to_board(board_id):
+    board = validate_model(Board, board_id)
 
-#     request_body = request.get_json()
-#     card_ids_list = request_body["task_ids"]
+    request_body = request.get_json()
+    card_ids_list = request_body["card_ids"]
 
-#     for task_id in task_ids_list:
-#         task = validate_model(Task, task_id)
-#         task.goal_id = goal.goal_id
+    for card_id in card_ids_list:
+        card = validate_model(Card, card_id)
+        card.board_id = board.board_id
 
-#         db.session.commit()
+        db.session.commit()
     
-#     goal_ids = [task.task_id for task in goal.tasks]
+    board_ids = [card.card_id for card in board.cards]
 
-#     return make_response(jsonify({"id": goal.goal_id, "task_ids": goal_ids}), 200)
+    return make_response(jsonify({"id": board.board_id, "board_ids": board_ids}), 200)
     
-
-    
-
-
-
 
 @board_bp.route("", methods=["GET"])
 def read_all_boards():
