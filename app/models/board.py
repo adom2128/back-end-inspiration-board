@@ -19,7 +19,7 @@ class Board(db.Model):
         return new_board
 
 
-def to_dict(self):
+    def to_dict(self):
         board_as_dict = {}
         board_as_dict["id"]=self.board_id
         board_as_dict["title"]=self.title
