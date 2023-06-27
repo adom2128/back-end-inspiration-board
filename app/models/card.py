@@ -11,7 +11,7 @@ class Card(db.Model):
     @classmethod
     def from_dict(cls, card_data):
         try:
-            new_card = Card(message=card_data["message"])
+            new_card = cls(message=card_data["message"])
         except KeyError:
             abort(make_response(jsonify({"details": "Invalid data"}), 400))
 
