@@ -2,7 +2,7 @@ from app import db
 from flask import abort, make_response, jsonify
 
 class Board(db.Model):
-    board_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    board_id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String, nullable=False)
     owner = db.Column(db.String, nullable=False)
     cards = db.relationship("Card", back_populates="board")

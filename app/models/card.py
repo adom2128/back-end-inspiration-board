@@ -2,7 +2,7 @@ from app import db
 from flask import abort, make_response, jsonify
 
 class Card(db.Model):
-    card_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    card_id = db.Column(db.Integer, primary_key=True)
     message = db.Column(db.String(40), nullable=False)
     likes_count = db.Column(db.Integer)
     color = db.Column(db.String, default=0)

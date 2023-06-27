@@ -25,7 +25,8 @@ def add_card_to_board(board_id):
     request_body = request.get_json()
 
     new_card = Card.from_dict(request_body)
-    new_card.board = board
+
+    new_card.board_id = board.board_id
 
     db.session.add(new_card)
     db.session.commit()
