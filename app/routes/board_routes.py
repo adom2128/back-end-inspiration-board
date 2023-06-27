@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify, make_response
 from app import db
-from app.models.board import Board
 from app.models.card import Card
+from app.models.board import Board
 from .routes_helpers import validate_model
 
 board_bp = Blueprint("boards", __name__, url_prefix="/boards")
@@ -23,17 +23,14 @@ def add_card_to_board(board_id):
     board = validate_model(Board, board_id)
 
     request_body = request.get_json()
-    card_ids_list = request_body["card_ids"]
 
-    for card_id in card_ids_list:
-        card = validate_model(Card, card_id)
-        card.board_id = board.board_id
+    new_card = Card.from_dict(request_body)
+    new_card.board = board
 
-        db.session.commit()
-    
-    board_ids = [card.card_id for card in board.cards]
+    db.session.add(new_card)
+    db.session.commit()
 
-    return make_response(jsonify({"id": board.board_id, "board_ids": board_ids}), 200)
+    return make_response(jsonify({"card created": new_card.to_dict(), "board_id": board_id}), 200)
     
 
 @board_bp.route("", methods=["GET"])
