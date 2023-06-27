@@ -44,7 +44,7 @@ def read_all_boards():
     return jsonify(boards_response), 200
 
 
-@board_bp.route("<board_id>/cards",  methods=["GET"])
+@board_bp.route("/<board_id>/cards",  methods=["GET"])
 def get_cards_of_one_board(board_id):
     board = validate_model(Board, board_id)
 
@@ -60,3 +60,13 @@ def get_cards_of_one_board(board_id):
         }
 
     return response_body
+
+@board_bp.route("/<board_id>",  methods=["DELETE"])
+def delete_board(board_id):
+    
+    board = validate_model(Board, board_id)
+
+    db.session.delete(board)
+    db.session.commit()
+
+    return make_response(jsonify(f"Board {board_id} sucessfully deleted"))

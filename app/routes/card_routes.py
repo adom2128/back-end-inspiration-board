@@ -6,12 +6,11 @@ from .routes_helpers import validate_model
 cards_bp = Blueprint('cards', __name__, url_prefix="/cards")
 
 @cards_bp.route("/<card_id>", methods=["PUT"])
-def update_card(card_id):
+def update_like_count_card(card_id):
 
     card = validate_model(Card, card_id)
-    request_body = request.get_json()
 
-    card.likes_count = request_body["likes_count"]
+    card.likes_count += 1
 
     db.session.commit()
 
