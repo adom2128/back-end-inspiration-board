@@ -26,5 +26,5 @@ def delete_card(card_id):
     db.session.delete(card)
     db.session.commit()
 
-    return make_response(jsonify(f"Card {card_id} sucessfully deleted"))
+    return make_response(jsonify(f"Card {card_id} successfully deleted"))
 
