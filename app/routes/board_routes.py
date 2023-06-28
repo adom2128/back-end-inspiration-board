@@ -53,7 +53,7 @@ def get_cards_of_one_board(board_id):
         cards_response.append(card.to_dict())
 
     response_body = {
-        "id": board.board_id,
+        "board_id": board.board_id,
         "title": board.title,
         "owner": board.owner,
         "cards": cards_response
