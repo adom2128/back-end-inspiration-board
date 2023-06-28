@@ -10,10 +10,17 @@ class Board(db.Model):
     @classmethod
     def from_dict(cls, board_data):
         try:
-            new_board = cls(title=board_data["title"],
-                              owner=board_data["owner"],
-                              )
-        except KeyError:
+            if board_data["title"] == "":
+                raise ValueError
+
+            if board_data["owner"] == "":
+                raise ValueError
+
+            new_board = cls(
+                title=board_data["title"],
+                owner=board_data["owner"]
+            )
+        except (ValueError, KeyError):
             abort(make_response(jsonify({"details": "Invalid data"}), 400))
 
         return new_board

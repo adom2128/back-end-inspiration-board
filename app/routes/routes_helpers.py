@@ -10,6 +10,8 @@ def validate_model(cls, model_id):
 
     if not model:
         abort(make_response({"message":f"{cls.__name__} {model_id} not found"}, 404))
-
+    
     return model
+
+    
 
