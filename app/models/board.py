@@ -18,7 +18,6 @@ class Board(db.Model):
 
         return new_board
 
-
     def to_dict(self):
         board_as_dict = {}
         board_as_dict["board_id"]=self.board_id
