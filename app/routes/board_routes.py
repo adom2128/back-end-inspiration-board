@@ -62,18 +62,18 @@ def get_cards_of_one_board(board_id):
     return response_body
 
 
-@board_bp.route("/<board_id>", methods=["PUT"])
-def update_board(board_id):
+# @board_bp.route("/<board_id>", methods=["PUT"])
+# def update_board(board_id):
 
-    board = validate_model(Board, board_id)
-    request_body = request.get_json()
+#     board = validate_model(Board, board_id)
+#     request_body = request.get_json()
 
-    board.title = request_body["title"]
-    board.owner = request_body["owner"]
+#     board.title = request_body["title"]
+#     board.owner = request_body["owner"]
 
-    db.session.commit()
+#     db.session.commit()
 
-    return make_response({"board": board.to_dict()}), 200
+#     return make_response({"board": board.to_dict()}), 200
 
 
 @board_bp.route("/<board_id>",  methods=["DELETE"])

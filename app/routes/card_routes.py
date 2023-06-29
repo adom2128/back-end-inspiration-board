@@ -5,17 +5,17 @@ from .routes_helpers import validate_model
 
 cards_bp = Blueprint('cards', __name__, url_prefix="/cards")
 
-@cards_bp.route("/<card_id>", methods=["PUT"])
-def update_card_msg(card_id):
+# @cards_bp.route("/<card_id>", methods=["PUT"])
+# def update_card_msg(card_id):
 
-    card = validate_model(Card, card_id)
-    request_body = request.get_json()
+#     card = validate_model(Card, card_id)
+#     request_body = request.get_json()
 
-    card.message = request_body["message"]
+#     card.message = request_body["message"]
 
-    db.session.commit()
+#     db.session.commit()
 
-    return make_response({"card": card.to_dict()}), 200
+#     return make_response({"card": card.to_dict()}), 200
 
 
 @cards_bp.route("/<card_id>/like", methods=["PUT"])
