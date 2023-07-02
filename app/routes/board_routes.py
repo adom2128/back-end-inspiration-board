@@ -68,6 +68,19 @@ def get_cards_of_one_board(board_id):
     return jsonify(cards_response), 200
 
 
+@board_bp.route("/<board_id>",  methods=["DELETE"])
+def delete_board(board_id):
+    
+    board = validate_model(Board, board_id)
+
+    db.session.delete(board)
+    db.session.commit()
+
+    return make_response(jsonify({"message":f"Board {board_id} successfully deleted"}), 200)
+
+
+# Optional Additional Routes
+
 # @board_bp.route("/<board_id>", methods=["PUT"])
 # def update_board(board_id):
 
@@ -80,14 +93,3 @@ def get_cards_of_one_board(board_id):
 #     db.session.commit()
 
 #     return make_response({"board": board.to_dict()}), 200
-
-
-@board_bp.route("/<board_id>",  methods=["DELETE"])
-def delete_board(board_id):
-    
-    board = validate_model(Board, board_id)
-
-    db.session.delete(board)
-    db.session.commit()
-
-    return make_response(jsonify(f"Board {board_id} successfully deleted"))
