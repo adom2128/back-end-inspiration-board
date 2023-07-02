@@ -27,7 +27,7 @@ def update_likes_card(card_id):
 
     db.session.commit()
 
-    return make_response({"card": card.to_dict()}), 200
+    return make_response(jsonify(card.to_dict())), 200
 
 
 @cards_bp.route("/<card_id>", methods=["DELETE"])
