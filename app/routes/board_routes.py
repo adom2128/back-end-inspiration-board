@@ -40,6 +40,11 @@ def get_all_boards():
     boards = Board.query.all()
 
     boards_response = [board.to_dict() for board in boards]
+
+    def get_id(entry):
+        return entry['board_id']
+    
+    boards_response.sort(key=get_id)
     
     return jsonify(boards_response), 200
 
@@ -64,6 +69,11 @@ def get_cards_of_one_board(board_id):
     cards_response = []
     for card in board.cards:
         cards_response.append(card.to_dict())
+
+    def get_id(entry):
+        return entry['card_id']
+    
+    cards_response.sort(key=get_id)
 
     return jsonify(cards_response), 200
 
