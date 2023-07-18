@@ -26,18 +26,3 @@ def delete_card(card_id):
     db.session.commit()
 
     return make_response(jsonify({"message":f"Card {card_id} successfully deleted"}), 200)
-
-
-# Optional Additional Routes
-
-# @cards_bp.route("/<card_id>", methods=["PUT"])
-# def update_card_msg(card_id):
-
-#     card = validate_model(Card, card_id)
-#     request_body = request.get_json()
-
-#     card.message = request_body["message"]
-
-#     db.session.commit()
-
-#     return make_response({"card": card.to_dict()}), 200
