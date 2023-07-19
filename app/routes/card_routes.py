@@ -38,4 +38,4 @@ def update_card_msg(card_id):
 
     db.session.commit()
 
-    return make_response(jsonify({card.to_dict()}), 200)
+    return jsonify({"message": f"Card {card_id} successfully updated"}), 200
